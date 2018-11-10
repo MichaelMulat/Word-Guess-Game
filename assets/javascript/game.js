@@ -1,9 +1,10 @@
 // make an array of words 
-var artists = ["Mikem", "Miguelm", "Michaelm", "Mickeym"];
+var artists = ["Dali", "picasso", "Monet", "warhol", "kahlo", "munch", "caravaggio", "goya", "basquiat", "Neel", "walker", "wiley", "lawrence", "shinobare"]["Dali", "picasso", "Monet", "warhol", "kahlo", "munch", "caravaggio", "goya", "basquiat", "Neel", "walker", "wiley", "lawrence", "shinobare"];
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var numWins = 0;
-var numLosses = 0;
-var numGuesses = 10;
+
+var numWins;
+var numLosses;
+var numGuesses;
 
 // Start the game
 // pick a random word from the array
@@ -22,13 +23,51 @@ var numWinsElem = document.getElementById("win-numbers");
 var numLossesElem = document.getElementById("loss-numbers");
 var numGuessesElem = document.getElementById("try-numbers");
 
+function newFunction() {
+    return 10;
+}
+
+function findIndicies(aWord, character) {
+    var indicies = [], i;
+    for (i = 0; i < aWord.length; i++) {
+        if (aWord[i] === character)
+            indicies.push(i);
+    }
+    return indicies;
+}
+
+// create blank array
+function createBlanks(aString) {
+    for (i = 0; i < aString.length; i++) {
+        blankWord.push("_")
+    }
+    return blankWord
+}
+
+function updateWins(){
+    
+}
+
+function updateLosses(){
+    if (numGuesses == 0) {
+        numLosses++;
+        numLossesElem.innerHTML = numLosses;
+
+        startGame();
+    }
+}
+
+// Use this functonarray to create blank spaces in the HTML #missing-letters
+function startGame(){
+    createBlanks(wordToGuess);
+    missingLettersElem.innerHTML = blankWord.join(" ");
+
+    var numGuesses = 10;
+    var 
+}
 
 
-// Use this array to create blank spaces in the HTML #missing-letters
-createBlanks(wordToGuess);
-missingLettersElem.innerHTML = blankWord.join(" ");
-
-
+window.onload = startGame();
 
 // User chooses a key
 document.onkeyup = function (event) {
@@ -60,20 +99,15 @@ document.onkeyup = function (event) {
                 missingLettersElem.innerHTML = blankWord.join(" ");
             
             } else {
-                
+
                 wrongLetters.push(playerGuess);
                 wrongLettersElem.innerHTML = "Wrong Letters: " + wrongLetters.join(" ")
                 numGuesses--;
                 numGuessesElem.innerHTML = numGuesses;
 
                 // if no tries left - restart
-                if (numGuesses == 0){
-                    numLosses++;
-                    numLossesElem.innerHTML = numLosses;
-                }
-                
-
-
+                updateLosses();
+            
             }
         
         } 
@@ -89,34 +123,3 @@ document.onkeyup = function (event) {
     }
 
 }
-
-
-// Check if the letter is already used
-// if it is -> message -> "You already used tried that"
-
-// if it isnt -> Check if it is in the random word.
-    // if the letter belongs in th random word - update the underscores array with the 
-    // letter in it 
-
-
-
-// Function checking all the indexes of an element in an string
-
-function findIndicies(aWord, character) {
-    var indicies = [], i;
-    for (i = 0; i < aWord.length; i++) {
-        if (aWord[i] === character)
-            indicies.push(i);
-    }
-    return indicies;
-}
-
-// create blank array
-
-function createBlanks(aString) {
-    for (i = 0; i < aString.length; i++) {
-        blankWord.push("_")
-    }
-    return blankWord
-}
-    
