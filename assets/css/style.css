@@ -1,0 +1,70 @@
+body {
+    background-color:white;
+}
+
+h1, h2, p {
+    font-family: 'Josefin Sans', sans-serif;
+    color:#e08b3d;
+}
+
+h1 {
+    font-size: 5em;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 2em;
+    padding-top: 10px;
+    
+}
+
+h3, .score-number {
+    font-family: 'Fjalla One', sans-serif;
+
+}
+.header-container {
+    
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px #e08b3d solid;
+    padding: 30px 0px;
+
+}
+
+.content {
+    max-width: 960px;
+    margin: auto;
+    
+}
+.score-container, .game-containter {
+    text-align: center;
+}
+.scoreboard {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    background-color:#e08b3d;
+    color: white;
+    text-transform: uppercase;
+    padding: 20px 0px;
+    font-size: 1.5em;
+}
+
+.score-number{
+    font-size: 2em;
+    padding-top: 15px;
+    color: white;
+}
+.game-containter {
+    margin: 30px;
+}
+#missing-letters {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 4em;
+    padding: 100px 0;
+
+    color:#e08b3d;
+
+}
+
+
