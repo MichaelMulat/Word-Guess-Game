@@ -1,26 +1,28 @@
 var numWins = 0;
 var numLosses = 0;
 
+function newGameLoad() {
+    HangmanGame();
+}
 
 window.onload = HangmanGame();
 // Use this functon array to create blank spaces in the HTML #missing-letters
 function HangmanGame(){
 
     var numGuesses = 10;
-    // Start the game
-    // pick a random word from the array
     var artists = ["Dali", "picasso", "Monet", "warhol", "kahlo", "munch", "caravaggio", "goya", "basquiat", "Neel", "walker", "wiley", "lawrence", "shinobare"];
     var randomNum = (Math.floor(Math.random() * artists.length));
     var wordToGuess = artists[randomNum].toUpperCase();
-    console.log("Word to guess: " + wordToGuess);
+    // console.log("Word to guess: " + wordToGuess);
 
     var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-    // create underscores to represent the missing letters of the word
+    // create blank arrays for the missing word and the wrong letters
     var blankWord = [];
     var wrongLetters = [];
 
-    
+    var isGameOver = false;
+    // UI Elements
 
     var instructionsElem = document.getElementById("instructions");
     var missingLettersElem = document.getElementById("missing-letters");
@@ -29,6 +31,11 @@ function HangmanGame(){
     var numLossesElem = document.getElementById("loss-numbers");
     var numGuessesElem = document.getElementById("try-numbers");
     var lowTriesElem = document.getElementById("try-score-board");
+   
+   // Popup Elements
+    var popupElem = document.getElementById("popup");
+    var ArtistNameElem = document.getElementById("artist-header");
+    var popupImageElem = document.getElementById("myGif");
 
 
     createBlanks(wordToGuess);
@@ -37,12 +44,7 @@ function HangmanGame(){
     resetUI();
 
 
-    function resetUI(){
-        instructionsElem.textContent = "Press any letter key to get started!"
-        numGuessesElem.textContent = numGuesses;
-        wrongLettersElem.textContent = "Wrong Letters: "
-        lowTriesElem.style.backgroundColor = "black";
-    }
+    
    
     
 
@@ -54,7 +56,7 @@ document.onkeyup = function (event) {
     console.log(playerGuess);
 
     // Check if the key entered is a letter
-    if (alphabet.includes(playerGuess.toLowerCase())) {
+    if (alphabet.includes(playerGuess.toLowerCase()) && !isGameOver) {
         
         //Check if the playerGuess is already used - is not in either arrays already 
         if (!blankWord.includes(playerGuess) && !wrongLetters.includes(playerGuess)) { 
@@ -78,7 +80,9 @@ document.onkeyup = function (event) {
                     numWins++;
                     numWinsElem.innerHTML= numWins;
                     instructionsElem.innerHTML = "Great, Let's play again!"
-                    HangmanGame();
+
+                    popupImageElem.src = "assets/images/good-job.gif";
+                    displayPopup();
 
                 }
             
@@ -95,7 +99,10 @@ document.onkeyup = function (event) {
                     numLosses++;
                     numLossesElem.innerHTML = numLosses;
 
-                    HangmanGame();
+                    // HangmanGame();
+                    popupImageElem.src = "assets/images/no-no-giphy.gif";
+                    displayPopup();
+
                 } else if(numGuesses <= 3){
                     lowTriesElem.style.backgroundColor = "red";
                 }
@@ -131,6 +138,23 @@ document.onkeyup = function (event) {
                 indicies.push(i);
         }
         return indicies;
+    }
+
+    function resetUI() {
+        instructionsElem.textContent = "Press any letter key to get started!"
+        numGuessesElem.textContent = numGuesses;
+        wrongLettersElem.textContent = "Wrong Letters: "
+        lowTriesElem.style.backgroundColor = "#191716";
+        popupElem.style.display = "none";
+    }
+
+    function displayPopup(){
+        popupElem.style.display = "block"
+        ArtistNameElem.innerHTML = wordToGuess;
+        isGameOver = true;
+
+        
+
     }
 
 }
